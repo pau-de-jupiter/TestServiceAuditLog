@@ -199,7 +199,8 @@ createdb odoo16
 ```bash
 docker compose exec odoo odoo \
   --db_host=db --db_user=odoo --db_password=odoo \
-  -d odoo --test-enable --stop-after-init \
+  -d odoo_test --test-enable --stop-after-init \
+  --test-tags=audit_log \
   -i audit_log
 ```
 

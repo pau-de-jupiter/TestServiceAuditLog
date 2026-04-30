@@ -17,6 +17,7 @@ class TestAuditRule(TransactionCase):
             ('name', '=', 'phone'),
         ], limit=1)
 
+        self.env['audit.rule'].search([('model_id', '=', self.model.id)]).unlink()
         self.rule = self.env['audit.rule'].create({
             'name': 'Test rule — res.partner',
             'model_id': self.model.id,
@@ -37,10 +38,11 @@ class TestAuditRule(TransactionCase):
 
     def test_no_double_patch(self):
         """Повторный вызов _patch_models не должен двойно оборачивать write()."""
-        original = self.env['res.partner'].write
+        ModelClass = type(self.env['res.partner'])
+        original = ModelClass.write
         self.rule._patch_models()
-        self.assertEqual(
-            self.env['res.partner'].write, original,
+        self.assertIs(
+            ModelClass.write, original,
             'write() был обёрнут повторно',
         )
 
