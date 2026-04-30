@@ -186,7 +186,7 @@ createdb odoo16
 4. Вернуться в **Audit → Logs** — запись появится
 5. Открыть **Audit → Сводный отчёт** — выставить даты, нажать "Сформировать"
 
-![Пример](TestServiceAuditLog/docs/images/test_screen.png)
+![Пример](docs/images/test_screen.png)
 
 ---
 
