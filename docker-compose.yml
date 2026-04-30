@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+      POSTGRES_DB: odoo
+    ports:
+      - "5434:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  odoo:
+    image: odoo:16.0
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8069:8069"
+    volumes:
+      - .:/mnt/extra-addons/audit_log
+      - odoo_data:/var/lib/odoo
+    environment:
+      HOST: db
+      USER: odoo
+      PASSWORD: odoo
+    command: >
+      odoo
+      --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons
+      --db_host=db
+      --db_user=odoo
+      --db_password=odoo
+      --database=odoo
+      --init=base,audit_log
+      --dev=all
+
+volumes:
+  db_data:
+  odoo_data:

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="audit_log_view_list" model="ir.ui.view">
+        <field name="name">audit.log.list</field>
+        <field name="model">audit.log</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" delete="false">
+                <field name="create_date" string="Date"/>
+                <field name="user_name" string="User"/>
+                <field name="model_name"/>
+                <field name="record_name"/>
+                <field name="field_description" string="Field"/>
+                <field name="old_value"/>
+                <field name="new_value"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="audit_log_action" model="ir.actions.act_window">
+        <field name="name">Audit Logs</field>
+        <field name="res_model">audit.log</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>

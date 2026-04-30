@@ -1,0 +1,20 @@
+{
+    'name': 'Audit Log',
+    'version': '16.0.1.0.0',
+    'summary': 'Track who changed what and when in business records',
+    'category': 'Tools',
+    'author': 'Custom',
+    'depends': ['base'],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/audit_rule_views.xml',
+        'views/audit_log_views.xml',
+        'views/audit_summary_views.xml',
+        'views/menu.xml',
+    ],
+    'installable': True,
+    'application': False,
+    'license': 'LGPL-3',
+    'demo': [],
+    'test': [],
+}
